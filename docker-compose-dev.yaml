@@ -3,12 +3,14 @@ version: "3.8"
 services:
     nodejs:
         build: 
-            dockerfile: ./docker/node.dockerfile
+            dockerfile: ./docker/node-dev.dockerfile
             context: .
         image: r4deu51/
         container_name: \*/
         ports:
             - "3000"
+        volumes:
+            - ./:/app:rw
         networks:
             - network
     nginx:
