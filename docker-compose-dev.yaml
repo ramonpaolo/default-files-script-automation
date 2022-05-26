@@ -24,6 +24,9 @@ services:
             - "443:443"
         networks:
             - network
+        depends_on:
+            - nodejs
+        restart: always
 
 networks:
     network:
