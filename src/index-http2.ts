@@ -4,11 +4,13 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import fs from 'fs'
 import spdy from 'spdy'
+import helmet from 'helmet'
 
 dotenv.config()
 
 const app = express()
 
+app.use(helmet())
 app.use(cors())
 app.use(compression())
 

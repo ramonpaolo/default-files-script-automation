@@ -2,11 +2,13 @@ import express from 'express'
 import compression from 'compression'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import helmet from 'helmet'
 
 dotenv.config()
 
 const app = express()
 
+app.use(helmet())
 app.use(cors())
 app.use(compression())
 
