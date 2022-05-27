@@ -5,6 +5,7 @@
 - [Após executar o script, o que devo mudar no código?](#após-executar-o-script-o-que-devo-mudar-no-código)
 - [O que o arquivo configura tanto?](#o-que-o-arquivo-configura-tanto)
 - [Depêndencias utilizadas?](#depêndencias-utilizadas)
+- [Possíveis Erros](#possíveis-erros)
 
 <!--
 
@@ -155,6 +156,23 @@ O arquivo shell, configura o seguinte:
   }
 }
 ```
+
+# Possíveis Erros
+Até o momento, observei 2 possíveis erros no projeto.
+
+1 - Problema com a porta de forwarding, para se conectar com o NGINX na porta 80/443
+
+2 - Problema com o <kbd>tsc: command not found</kbd>, na hora de fazer o build do projeto
+
+---
+
+## As possíveis soluções são:
+
+1 - Veja se tem algum container docker rodando, usando a porta 80 e a porta 443 no localhost
+
+2 - Poderá rodar o comando <kbd>yarn install</kbd>, no terminal do projeto, assim o yarn irá atualizar o yarn.lock, que possívelmente está corrompido
+
+---
 
 ![GitHub top language](https://img.shields.io/github/languages/top/ramonpaolo/default-files-script-automation)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ramonpaolo/default-files-script-automation)
