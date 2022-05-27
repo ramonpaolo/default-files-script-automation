@@ -22,3 +22,5 @@ app.get('/', (_, res) => {
 })
 
 app.listen(PORT)
+
+export default app

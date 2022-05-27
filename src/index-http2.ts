@@ -29,3 +29,5 @@ const server = spdy.createServer({
 }, app)
 
 server.listen(PORT)
+
+export default server
