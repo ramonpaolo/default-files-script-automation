@@ -14,9 +14,6 @@ Esse projeto será usado pelo projeto: [Script Confi Project](https://github.com
 
 -->
 
-
-<br>
-
 # Como esse projeto funciona?
 O arquivo shell script, irá determinar quais arquivos vão ser baixados, conforme as opções que o usuário escolheu.
 
@@ -30,58 +27,50 @@ Após selecionar as 4 opções, o script irá executar os devidos comandos para 
 
 O script faz nada menos, do que um jogo de if/else para baixar arquivos/dependências que o usuário irá precisar.
 
-<br>
-
 # Como funcionam as opções?
 ## Docker
 A opção de escolher se o docker vai estar no projeto, irá fazer com que o arquivo baixe alguns arquivos dockerfile, e o arquivo docker-compose-dev.yaml e docker-compose.yaml, com 2 serviços já presentes, sendo eles o NodeJs, e o NGINX, para Load Balance e Proxy Reverse.
-
-<br>
 
 ## HTTP/2.0
 Caso você escolha utilizar a versão HTTP/2.0 no projeto, o arquivo index.ts baixado pelo script, será diferente, e baixará um novo pacote do npm, que é o SPDY, que habilita o uso do HTTP/2.0 com o Express.
 
 Junto com setar o Express para HTTP/2.0, ele irá também, criar os certificados SSL, e irá baixar um arquivo nginx.conf diferente, um que permite a conexão SSL.
 
-<br>
-
 ## Banco de dados
 Essa opção, irá apenas baixar algumas dependências a mais, como o PostgreSQL, Mongoose, Ioredis, Sequelize e seus types.
-
-<br>
 
 ## Cloud
 Essa opção irá apenas baixar a dependência escolhida por você.
 
 ---
 
-<br>
-
 # Após executar o script, o que devo mudar no código?
 Após o projeto ser totalmente criado, você deverá mudar o <kbd>package.json</kbd>, e adicionar o seguinte campo/field:
 ```json
 {
  "scripts": {
-      "dev": "nodemon -L ./src/index.ts",
-      "build": "tsc",
-      "start": "node ./dist/index.js"
+    "dev": "nodemon -L ./src/index.ts",
+    "build": "tsc",
+    "start": "node ./dist/index.js",
+    "test:local": "jest --watchAll",
+    "test:docker": "jest"
   }
 }
 ```
 
-Após isso, você deverá mudar os arquivos <kbd>docker-compose-dev</kbd> e <kbd>docker-compose.yaml</kbd>, sobre os campos:
+Após isso, você deverá mudar os arquivos <kbd>docker-compose-dev.yaml</kbd> e <kbd>docker-compose.yaml</kbd>, sobre os campos:
 ```yaml
 version: '3.8'
 services:
     nodejs:
         #...
-        container_name: \*/
         image: r4deu51\
+        container_name: \*/
     #....
     nginx:
         #....
-        container_name: \*/
         image: r4deu51\
+        container_name: \*/
     #....
 ```
 Colocando o nome do container que desejar e mudar o nome da imagem.
@@ -140,19 +129,23 @@ O arquivo shell, configura o seguinte:
     "express": "",
     "express-rate-limit": "",
     "jest": "",
-    "spdy": "",
-    "typescript": ""
+    "spdy": ""
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-typescript": "^7.17.12",
     "@types/compression": "",
     "@types/cors": "",
     "@types/express": "",
     "@types/jest": "",
     "@types/spdy": "",
+    "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "",
     "@typescript-eslint/parser": "",
     "nodemon": "",
-    "ts-node": ""
+    "supertest": "",
+    "ts-node": "",
+    "typescript": ""
   }
 }
 ```
