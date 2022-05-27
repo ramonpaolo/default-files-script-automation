@@ -132,14 +132,14 @@ O arquivo shell, configura o seguinte:
     "spdy": ""
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.18.2",
-    "@babel/preset-typescript": "^7.17.12",
+    "@babel/preset-env": "",
+    "@babel/preset-typescript": "",
     "@types/compression": "",
     "@types/cors": "",
     "@types/express": "",
     "@types/jest": "",
     "@types/spdy": "",
-    "@types/supertest": "^2.0.12",
+    "@types/supertest": "",
     "@typescript-eslint/eslint-plugin": "",
     "@typescript-eslint/parser": "",
     "nodemon": "",
