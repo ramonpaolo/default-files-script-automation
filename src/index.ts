@@ -27,6 +27,6 @@ app.get('/', (_, res) => {
     })
 })
 
-app.listen(PORT)
+const server = app.listen(PORT)
 
-export default app
+export default server
