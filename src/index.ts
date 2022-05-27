@@ -3,11 +3,17 @@ import compression from 'compression'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import helmet from 'helmet'
+import expressRateLimit from 'express-rate-limit'
 
 dotenv.config()
 
 const app = express()
 
+app.use(expressRateLimit({
+    windowMs: 60 * 1000,
+    max: 5,
+    legacyHeaders: true
+}))
 app.use(helmet())
 app.use(cors())
 app.use(compression())
