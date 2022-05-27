@@ -53,7 +53,7 @@ Após o projeto ser totalmente criado, você deverá mudar o <kbd>package.json</
     "build": "tsc",
     "start": "node ./dist/index.js",
     "test:local": "jest --watchAll",
-    "test:docker": "jest"
+    "test:docker": "jest ./dist"
   }
 }
 ```
