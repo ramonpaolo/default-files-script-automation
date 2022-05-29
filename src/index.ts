@@ -14,6 +14,7 @@ app.use(expressRateLimit({
     max: 5,
     legacyHeaders: true
 }))
+app.use(express.json())
 app.use(helmet())
 app.use(cors())
 app.use(compression())
