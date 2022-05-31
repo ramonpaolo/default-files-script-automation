@@ -25,7 +25,7 @@ WORKDIR /app
 EXPOSE 3000
 
 COPY --from=apptest /app/dist ./dist
-COPY --from=apptest /app/package.json /app/yarn.lock ./
+COPY --from=apptest /app/package.json /app/yarn.lock /.env ./
 
 RUN yarn install --production
 
