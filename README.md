@@ -1,5 +1,7 @@
 # Default Files Script Automation
 
+![Banner](https://ik.imagekit.io/9t3dbkxrtl/Default_Structure_Project__3__uK4ZiQqNN.png?ik-sdk-version=javascript-1.4.3&updatedAt=1654106622631)
+
 - [Como esse projeto funciona?](#como-esse-projeto-funciona)
 - [Como funcionam as opções?](#como-funcionam-as-opções)
 - [Após executar o script, o que devo mudar no código?](#após-executar-o-script-o-que-devo-mudar-no-código)
