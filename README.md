@@ -17,7 +17,7 @@ Esse projeto será usado pelo projeto: [Script Confi Project](https://github.com
 -->
 
 # Como esse projeto funciona?
-O arquivo shell script, irá determinar quais arquivos vão ser baixados, conforme as opções que o usuário escolheu.
+O arquivo [Shell Script](https://github.com/ramonpaolo/script-confi-project), irá determinar quais arquivos vão ser baixados, conforme as opções que o usuário escolheu.
 
 Existem as seguintes opções:
 - Escolher se docker deverá estar no projeto
