@@ -4,8 +4,11 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import helmet from 'helmet'
 import expressRateLimit from 'express-rate-limit'
+import logger from './settings/logger.settings'
 
 dotenv.config()
+
+logger.info('initializing application')
 
 const app = express()
 
