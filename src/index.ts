@@ -7,7 +7,7 @@ import expressRateLimit from 'express-rate-limit'
 
 // Settings
 import logger from './settings/logger.settings'
-import connection from './settings/sequelize.docker.settings'
+import connection from './settings/sequelize.settings'
 
 dotenv.config();
 
