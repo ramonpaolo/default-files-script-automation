@@ -7,15 +7,10 @@ import expressRateLimit from 'express-rate-limit'
 
 // Settings
 import logger from './settings/logger.settings'
-import connection from './settings/sequelize.settings'
 
 dotenv.config();
 
 logger.info('initializing application');
-
-(async () => {
-    await connection.sync()
-})
 
 const app = express()
 
