@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+    nodejs:
+        build: 
+            dockerfile: ./docker/node-dev.dockerfile
+            context: .
+        image: r4deu51/gsd
+        container_name: hds
+        ports:
+            - "3000"
+        volumes:
+            - ./:/app:rw
+        networks:
+            - network
+        environment:
+            - NODE_ENV=development
+    nginx:
+        build: 
+            dockerfile: ./docker/nginx.dockerfile
+            context: .
+        image: r4deu51/gds
+        container_name: gsf
+        ports:
+            - "80:80"
+            - "443:443"
+        networks:
+            - network
+        depends_on:
+            - nodejs
+        restart: always
+
+    postgres:
+        image: postgres:alpine
+        container_name: asdsad
+        networks:
+            - network
+        environment:
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_USER=postgres
+        restart: always
+
+networks:
+    network:
+        driver: bridge    

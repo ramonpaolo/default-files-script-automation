@@ -4,11 +4,18 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import helmet from 'helmet'
 import expressRateLimit from 'express-rate-limit'
+
+// Settings
 import logger from './settings/logger.settings'
+import connection from './settings/sequelize.docker.settings'
 
-dotenv.config()
+dotenv.config();
 
-logger.info('initializing application')
+logger.info('initializing application');
+
+(async () => {
+    await connection.sync()
+})
 
 const app = express()
 
