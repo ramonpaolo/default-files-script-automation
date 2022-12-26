@@ -13,6 +13,13 @@ services:
             - network
         environment:
             - NODE_ENV=production
+        healthcheck:
+            test: ["curl", "http://localhost:3000"]
+            interval: 1m00s
+            timeout: 5s
+            retries: 2
+            start_period: 30s
+        
     nginx:
         build: 
             dockerfile: ./docker/nginx.dockerfile
@@ -24,6 +31,12 @@ services:
             - "443:443"
         networks:
             - network
+        healthcheck:
+            test: ["curl", "http://localhost"]
+            interval: 1m00s
+            timeout: 5s
+            retries: 2
+            start_period: 30s
 
     redis:
         image: redis:alpine

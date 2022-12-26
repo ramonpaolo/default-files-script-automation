@@ -15,6 +15,13 @@ services:
             - network
         environment:
             - NODE_ENV=development
+        healthcheck:
+            test: ["curl", "http://localhost:3000"]
+            interval: 1m00s
+            timeout: 5s
+            retries: 2
+            start_period: 30s
+
     nginx:
         build: 
             dockerfile: ./docker/nginx.dockerfile
@@ -29,6 +36,12 @@ services:
         depends_on:
             - nodejs
         restart: always
+        healthcheck:
+            test: ["curl", "http://localhost"]
+            interval: 1m00s
+            timeout: 5s
+            retries: 2
+            start_period: 30s
 
     mongo:
         image: mongo:alpine
