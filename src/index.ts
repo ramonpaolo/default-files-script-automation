@@ -26,10 +26,11 @@ app.use(compression())
 
 const PORT = process.env.PORT || 3000
 
-app.get('/', (_, res) => {
+app.get('/healthcheck', (_, res) => {
     res.status(200).json({
         status: 'success',
-        message: 'Project is working : )'
+        message: 'project is working',
+        uptime: process.uptime()
     })
 })
 
