@@ -1,5 +1,5 @@
-import winston from "winston";
-import { hostname } from "os";
+import winston from 'winston';
+import { hostname } from 'os';
 
 // Enable send logs to DataDog
 const httpOptions: winston.transports.HttpTransportOptions = {
