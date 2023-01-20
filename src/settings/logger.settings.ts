@@ -1,10 +1,12 @@
 import winston from 'winston';
 import { hostname } from 'os';
 
+const serviceName = ''
+
 // Enable send logs to DataDog
 const httpOptions: winston.transports.HttpTransportOptions = {
     host: 'http-intake.logs.datadoghq.com',
-    path: `/api/v2/logs?dd-api-key=${process.env.DATADOG_API_KEY}&ddsource=nodejs&service=web-scraping-price-${process.env.NODE_ENV}&hostname=${hostname()}`,
+    path: `/api/v2/logs?dd-api-key=${process.env.DATADOG_API_KEY}&ddsource=nodejs&service=${serviceName}-${process.env.NODE_ENV}&hostname=${hostname()}`,
     ssl: true
 }
 
