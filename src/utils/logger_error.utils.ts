@@ -1,9 +1,10 @@
 /* eslint-disable curly */
 import { Request } from 'express'
 
+// Settings
 import logger from '../settings/logger.settings'
 
-const loggerError = (error: Error, request?: Request) => {
+const loggerError = (error: Error, request?: Request, optional?: object) => {
   if (request != null)
     logger.error({
       request: {
@@ -14,7 +15,8 @@ const loggerError = (error: Error, request?: Request) => {
       error: {
         error_name: error.name,
         error_message: error.message,
-        error_stack: error.stack?.split('/n')
+        error_stack: error.stack?.split('/n'),
+        ...optional
       }
     })
   else
@@ -22,7 +24,8 @@ const loggerError = (error: Error, request?: Request) => {
       error: {
         error_name: error.name,
         error_message: error.message,
-        error_stack: error.stack?.split('/n')
+        error_stack: error.stack?.split('/n'),
+        ...optional
       }
     })
 }
