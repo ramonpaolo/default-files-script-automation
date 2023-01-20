@@ -4,7 +4,7 @@ import app from '../index'
 
 describe('GET /', () => {
     it('response status has to be equal 200', async () => {
-        const response = await request(app).get('/')
+        const response = await request(app).get('/healthcheck')
 
         expect(response.status).toBe(200)
     })
