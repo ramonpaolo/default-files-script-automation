@@ -15,7 +15,7 @@ const loggerError = (error: Error, request?: Request, optional?: object) => {
       error: {
         error_name: error.name,
         error_message: error.message,
-        error_stack: error.stack?.split('/n'),
+        error_stack: error.stack?.split('\n'),
         ...optional
       }
     })
@@ -24,7 +24,7 @@ const loggerError = (error: Error, request?: Request, optional?: object) => {
       error: {
         error_name: error.name,
         error_message: error.message,
-        error_stack: error.stack?.split('/n'),
+        error_stack: error.stack?.split('\n'),
         ...optional
       }
     })
