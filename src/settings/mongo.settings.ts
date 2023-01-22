@@ -1,7 +1,7 @@
 import moongoose from 'mongoose'
 
 // Utils
-import loggerError from '../utils/logger_error.utils'
+import { loggerError } from '../utils/logger.utils'
 
 const connection = async () => {
     try {
@@ -9,7 +9,7 @@ const connection = async () => {
             pass: '',
             user: ''
         })
-        
+
         return conn
     } catch (error) {
         loggerError(error)
