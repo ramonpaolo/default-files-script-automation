@@ -5,7 +5,8 @@ const connection = new Sequelize({
     host: 'postgres',
     password: 'postgres',
     username: 'postgres',
-    port: 5432
+    port: 5432,
+    logging: process.env.NODE_ENV === 'development'
 })
 
 export default connection
