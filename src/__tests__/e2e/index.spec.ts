@@ -1,6 +1,7 @@
 import request from 'supertest';
 
-import app from '../index'
+// Server
+import app from '../../index'
 
 describe('GET /', () => {
     it('response status has to be equal 200', async () => {
@@ -10,4 +11,6 @@ describe('GET /', () => {
     })
 })
 
-app.close()
+afterAll(() => {
+    app.close()
+})
