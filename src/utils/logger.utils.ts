@@ -4,6 +4,8 @@ import { Request } from 'express'
 // Settings
 import logger from '../settings/logger.settings'
 
+const env = process.env.NODE_ENV
+
 const loggerError = (error: Error, request?: Request, optional?: object) => {
   if (request != null) {
     const ipV4 = request.ip.split(':').pop()
@@ -16,6 +18,7 @@ const loggerError = (error: Error, request?: Request, optional?: object) => {
         request_path: request.path,
         request_body: request.body
       },
+      env,
       error: {
         error_name: error.name,
         error_message: error.message,
@@ -31,7 +34,8 @@ const loggerError = (error: Error, request?: Request, optional?: object) => {
       error_message: error.message,
       error_stack: error.stack?.split('\n'),
       ...optional
-    }
+    },
+    env,
   })
 }
 
@@ -39,6 +43,7 @@ const loggerInfo = (message: string, optional?: object, request?: Request) => {
   if (request === undefined) return logger.info({
     status: 'success',
     message,
+    env,
     ...optional
   })
 
@@ -46,6 +51,7 @@ const loggerInfo = (message: string, optional?: object, request?: Request) => {
   return logger.info({
     status: 'success',
     message,
+    env,
     ...optional,
     request: {
       request_ip: {
