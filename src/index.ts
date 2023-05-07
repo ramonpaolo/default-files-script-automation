@@ -10,7 +10,12 @@ import logger from './settings/logger.settings'
 
 dotenv.config();
 
-logger.info('initializing application');
+const env = process.env.NODE_ENV
+
+logger.info({
+    message: `initializing application on ${env}`,
+    env,
+});
 
 const app = express()
 

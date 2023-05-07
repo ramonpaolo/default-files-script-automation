@@ -7,7 +7,17 @@ import spdy from 'spdy'
 import helmet from 'helmet'
 import expressRateLimit from 'express-rate-limit'
 
+// Settings
+import logger from './settings/logger.settings'
+
 dotenv.config()
+
+const env = process.env.NODE_ENV
+
+logger.info({
+    message: `initializing application on ${env}`,
+    env,
+});
 
 const app = express()
 
