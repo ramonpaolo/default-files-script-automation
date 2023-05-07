@@ -15,6 +15,7 @@ const loggerError = (error: Error, request?: Request, optional?: object) => {
         request_ip: {
           request_ip_v4: ipV4,
         },
+        request_id: request.header('x-request-id'),
         request_path: request.path,
         request_body: request.body
       },
@@ -57,6 +58,7 @@ const loggerInfo = (message: string, optional?: object, request?: Request) => {
       request_ip: {
         request_ip_v4: ipV4,
       },
+      request_id: request.header('x-request-id'),
       request_path: request.path,
       request_body: request.body,
     },

@@ -4,6 +4,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import helmet from 'helmet'
 import expressRateLimit from 'express-rate-limit'
+import crypto from 'crypto'
 
 // Settings
 import logger from './settings/logger.settings'
@@ -18,6 +19,11 @@ logger.info({
 });
 
 const app = express()
+
+app.use((req, _, next) => {
+    req.headers['x-request-id'] = crypto.randomUUID()
+    next()
+})
 
 app.use(expressRateLimit({
     windowMs: 60 * 1000,
