@@ -22,6 +22,7 @@ const logger = winston.createLogger({
         service: serviceName,
         env: APP_ENV,
     },
+    silent: APP_ENV === 'test'
 })
 
 export default logger
