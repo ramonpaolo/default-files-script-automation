@@ -1,19 +1,26 @@
 import moongoose from 'mongoose'
 
 // Utils
-import { loggerError } from '../utils/logger.utils'
+import { loggerError, loggerInfo } from '../utils/logger.utils'
 
-const connection = async () => {
+const { MONGO_URL } = process.env
+
+let mongoClient: moongoose.Mongoose
+
+;(async () => {
     try {
-        const conn = await moongoose.connect('mongo://mongo', {
-            pass: '',
-            user: ''
-        })
+        mongoClient = await moongoose.connect(String(MONGO_URL))
 
-        return conn
+        loggerInfo('connected with success in mongodb')
+
+        return mongoClient
     } catch (error) {
-        loggerError(error)
-    }
-}
+        loggerError(error, 'failed to connect in mongodb')
 
-export default connection
+        throw error
+    }
+})()
+
+export {
+    mongoClient,
+}
