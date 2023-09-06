@@ -8,8 +8,8 @@ import crypto from 'crypto'
 
 // Settings
 import logger from './settings/logger.settings'
-
 import { mongoClient } from './settings/mongo.settings'
+import { redis } from './settings/redis.settings'
 
 dotenv.config();
 
@@ -53,6 +53,7 @@ signals.forEach((signalToListen) => {
     process.on(signalToListen, async (signal) => {
         server.close(async () => {
             await mongoClient.disconnect()
+            await redis.quit()
         
             logger.warn({
                 message: 'gracefully shutdown service',

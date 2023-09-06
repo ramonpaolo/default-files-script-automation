@@ -22,6 +22,10 @@ declare global {
             // GRAFANA
             GRAFANA_USERNAME: string = ""
             GRAFANA_PASSWORD: string = ""
+
+            // REDIS
+            REDIS_HOST: string = ""
+            REDIS_URL: string = ""
         }
     }
 }
