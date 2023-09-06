@@ -6,6 +6,7 @@ services:
             dockerfile: ./docker/node-dev.dockerfile
             context: .
         container_name: server_
+        image: r4deu51/server_
         ports:
             - "3000:3000"
         networks:
@@ -15,12 +16,63 @@ services:
             - APP_ENV=development
         env_file:
             - ./.env
+        depends_on:
+            - redis
+            - postgres
+            - mongo
+            - lavin
+
+    tests-e2e:
+        command: yarn test:dev:e2e
+        container_name: tests_e2e_
+        image: r4deu51/server_
+        volumes:
+            - ./:/app:rw
+            - /app/node_modules
+        env_file:
+            - ./.env.test
+        depends_on:
+            - redis
+            - postgres
+            - mongo
+            - lavin
+
+    tests-unit:
+        command: yarn test:dev:unit
+        container_name: tests_unit_
+        image: r4deu51/server_
+        volumes:
+            - ./:/app:rw
+            - /app/node_modules
+        env_file:
+            - ./.env.test
+        depends_on:
+            - redis
+            - postgres
+            - mongo
+            - lavin
+
+    tests:
+        command: yarn test:dev
+        container_name: tests_
+        image: r4deu51/server_
+        volumes:
+            - ./:/app:rw
+            - /app/node_modules
+        env_file:
+            - ./.env.test
+        depends_on:
+            - redis
+            - postgres
+            - mongo
+            - lavin
 
     nginx:
         build: 
             dockerfile: ./docker/nginx.dockerfile
             context: .
         container_name: nginx_
+        image: r4deu51/nginx_
         ports:
             - "80:80"
             - "443:443"
