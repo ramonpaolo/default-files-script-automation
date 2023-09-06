@@ -1,12 +1,37 @@
 import { Sequelize } from 'sequelize'
 
-const connection = new Sequelize({
-    dialect: 'postgres',
-    host: 'postgres',
-    password: 'postgres',
-    username: 'postgres',
-    port: 5432,
-    logging: process.env.NODE_ENV === 'development'
-})
+// utils
+import { loggerError, loggerInfo } from '../utils/logger.utils';
 
-export default connection
+const { NODE_ENV, POSTGRES_URL } = process.env;
+
+let sequelize: Sequelize;
+
+(async () => {
+    try {
+        sequelize = new Sequelize(String(POSTGRES_URL), {
+            logging: false,
+            dialect: 'postgres',
+            dialectOptions: NODE_ENV === 'production' ? {
+                ssl: {
+                    require: false,
+                    rejectUnauthorized: false,
+                }
+            } : {}
+        })
+
+        loggerInfo('connect on postgresql with success')
+
+        await sequelize.authenticate()
+
+        return sequelize;
+    } catch (error) {
+        loggerError(error, 'failed to connect in postgresql')
+
+        throw error;
+    }
+})();
+
+export {
+    sequelize,
+}
