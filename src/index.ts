@@ -1,7 +1,6 @@
 import express from 'express'
 import compression from 'compression'
 import cors from 'cors'
-import dotenv from 'dotenv'
 import helmet from 'helmet'
 import expressRateLimit from 'express-rate-limit'
 import crypto from 'crypto'
@@ -11,8 +10,6 @@ import logger from './settings/logger.settings'
 import { mongoClient } from './settings/mongo.settings'
 import { redis } from './settings/redis.settings'
 import { sequelize } from './settings/sequelize.settings'
-
-dotenv.config();
 
 const { APP_ENV, PORT } = process.env;
 
