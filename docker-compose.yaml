@@ -1,18 +1,57 @@
 version: "3.8"
 
 services:
-    server:
+    tests:
         build: 
-            dockerfile: ./docker/node.dockerfile
+            dockerfile: ./docker/test.dockerfile
             context: .
-        container_name: server_
-        ports:
-            - "3000:3000"
+        image: tests_nodejs
+        container_name: tests_
+        env_file:
+            - ./.env.test
+        volumes:
+            - ./reports/:/app/reports/:rw
+        depends_on:
+            - redis
+            - postgres
+            - mongo
+            - lavin
+
+    redis:
+        image: redis:alpine
+        container_name: redis_
         networks:
             - network
+        restart: always
+
+    postgres:
+        image: postgres:15.4-alpine
+        container_name: postgres_
         environment:
-            - NODE_ENV=production
-            - APP_ENV=production
+            - POSTGRES_USER=test
+            - POSTGRES_PASSWORD=test
+        networks:
+            - network
+        restart: always
+
+    mongo:
+        image: mongo:7.0.1
+        container_name: mongo_
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=test
+            - MONGO_INITDB_ROOT_PASSWORD=test
+        networks:
+            - network
+        restart: always
+
+    lavin:
+        image: cloudamqp/lavinmq:1.2.2
+        container_name: lavinmq_
+        ports:
+            - "15672:15672"
+        networks:
+            - network
+        restart: always
 
 networks:
     network:
