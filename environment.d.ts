@@ -4,9 +4,10 @@ declare global {
             PORT: number;
 
             NODE_ENV: "test" | "development" | "production";
+            NODE_ENV: "test" | "development" | "production";
 
             // DATADOG
-            DATADOG_API_KEY: string = "";
+            DD_API_KEY: string = "";
         }
     }
 }
