@@ -4,64 +4,45 @@ import { Request } from 'express'
 // Settings
 import logger from '../settings/logger.settings'
 
-const env = process.env.NODE_ENV
-
-const loggerError = (error: Error, request?: Request, optional?: object) => {
-  if (request != null) {
-    const ipV4 = request.ip.split(':').pop()
-
+const loggerError = (error: Error, message: string, optional?: object, request?: Request) => {
+  if (request) {
     return logger.error({
-      request: {
-        request_ip: {
-          request_ip_v4: ipV4,
-        },
-        request_id: request.header('x-request-id'),
-        request_path: request.path,
-        request_body: request.body
-      },
-      env,
+      message,
       error: {
         error_name: error.name,
         error_message: error.message,
-        error_stack: error.stack?.split('\n'),
-        ...optional
-      }
+        error_stack: error.stack,
+      },
+      status: 'failed',
+      data: optional,
+      request_id: request.header('x-request-id'),
     })
   }
 
   return logger.error({
+    message,
     error: {
       error_name: error.name,
       error_message: error.message,
-      error_stack: error.stack?.split('\n'),
-      ...optional
+      error_stack: error.stack,
     },
-    env,
+    status: 'failed',
+    data: optional,
   })
 }
 
 const loggerInfo = (message: string, optional?: object, request?: Request) => {
-  if (request === undefined) return logger.info({
-    status: 'success',
+  if (!request) return logger.info({
     message,
-    env,
-    ...optional
+    status: 'success',
+    data: optional,
   })
 
-  const ipV4 = request.ip.split(':').pop()
   return logger.info({
-    status: 'success',
     message,
-    env,
-    ...optional,
-    request: {
-      request_ip: {
-        request_ip_v4: ipV4,
-      },
-      request_id: request.header('x-request-id'),
-      request_path: request.path,
-      request_body: request.body,
-    },
+    status: 'success',
+    data: optional,
+    request_id: request.header('x-request-id'),
   })
 }
 
