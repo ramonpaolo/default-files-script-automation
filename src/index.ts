@@ -9,13 +9,16 @@ import crypto from 'crypto'
 // Settings
 import logger from './settings/logger.settings'
 
+import { mongoClient } from './settings/mongo.settings'
+
 dotenv.config();
 
-const { APP_ENV, PORT } = process.env
+const { APP_ENV, PORT } = process.env;
 
-logger.info({
-    message: 'initializing application',
-});
+(async () => {
+    logger.info('initializing application');
+})()
+
 
 const app = express()
 
@@ -43,5 +46,21 @@ app.get('/healthcheck', (_, res) => {
 })
 
 const server = app.listen(PORT)
+
+const signals: NodeJS.Signals[] = ['SIGTERM', 'SIGINT']
+
+signals.forEach((signalToListen) => {
+    process.on(signalToListen, async (signal) => {
+        server.close(async () => {
+            await mongoClient.disconnect()
+        
+            logger.warn({
+                message: 'gracefully shutdown service',
+                signal,
+            })
+        })
+    })
+})
+
 
 export default server
