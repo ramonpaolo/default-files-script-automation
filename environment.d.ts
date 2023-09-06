@@ -16,6 +16,8 @@ declare global {
             // MONGO
             MONGO_USERNAME: string = ""
             MONGO_PASSWORD: string = ""
+            MONGO_HOST: string = ""
+            MONGO_URL: string = ""
 
             // GRAFANA
             GRAFANA_USERNAME: string = ""
