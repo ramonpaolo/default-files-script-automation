@@ -9,6 +9,9 @@ services:
         image: r4deu51/server_
         ports:
             - "3000:3000"
+        volumes:
+            - ./:/app:rw
+            - /app/node_modules
         networks:
             - network
         environment:
