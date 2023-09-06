@@ -1,4 +1,4 @@
-FROM node:14.17-alpine AS appbuild
+FROM node:16.20-alpine AS appbuild
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ RUN yarn build
 
 # ---------
 
-FROM node:14.17-alpine AS apptest
+FROM node:16.20-alpine AS apptest
 
 WORKDIR /app
 
@@ -18,7 +18,7 @@ RUN yarn test:docker
 
 # ---------
 
-FROM node:14.17-alpine
+FROM node:16.20-alpine
 
 WORKDIR /app
 
