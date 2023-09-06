@@ -11,11 +11,10 @@ import logger from './settings/logger.settings'
 
 dotenv.config();
 
-const env = process.env.NODE_ENV
+const { APP_ENV, PORT } = process.env
 
 logger.info({
-    message: `initializing application on ${env}`,
-    env,
+    message: 'initializing application',
 });
 
 const app = express()
@@ -27,15 +26,13 @@ app.use((req, _, next) => {
 
 app.use(expressRateLimit({
     windowMs: 60 * 1000,
-    max: 5,
+    max: APP_ENV === 'test' ? 500 : 50,
     legacyHeaders: true
 }))
 app.use(express.json())
 app.use(helmet())
 app.use(cors())
 app.use(compression())
-
-const PORT = process.env.NODE_ENV === 'test' ? 0 : process.env.PORT || 3000
 
 app.get('/healthcheck', (_, res) => {
     res.status(200).json({
