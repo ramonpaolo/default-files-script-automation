@@ -97,6 +97,8 @@ services:
             - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
         networks:
             - network
+        ports:
+            - "5432:5432"
         restart: always
 
     mongo:
