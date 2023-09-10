@@ -12,7 +12,9 @@ declare global {
             // POSTGRES
             POSTGRES_USERNAME: string = ""
             POSTGRES_PASSWORD: string = ""
+            POSTGRES_DATABASE: string = ""
             POSTGRES_URL: string = ""
+            POSTGRES_HOST: string = ""
 
             // MONGO
             MONGO_USERNAME: string = ""
